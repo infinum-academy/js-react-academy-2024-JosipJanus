@@ -46,6 +46,8 @@ body {
             .rating {
                 input {
                     border-radius: 8px;
+                    padding: 8px;
+                    min-width: 30%;
                 }
             }
 
@@ -56,6 +58,12 @@ body {
                 border: none;
                 cursor: pointer;
             }
+        }
+
+        #feed {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .card {

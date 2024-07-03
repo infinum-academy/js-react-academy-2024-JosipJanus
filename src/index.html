@@ -41,21 +41,16 @@
                     <textarea name="review" id="review" rows="4" placeholder="Add review..."></textarea>
                 </div>
                 <div class="rating">
-                    <input type="text" placeholder="Add rating ...">
+                    <input id="rating" type="number" min="1" max="5" placeholder="Add rating ...">
                 </div>
                 <button type="submit" class="submit-btn">Submit review</button>
             </section>
         </form>
         <section class="comments">
             <h2>Reviews</h2>
-            <div class="card">
-                <div class="review">
-                    <p>Great show, I loved it!</p>
-                </div>
-                <div class="rating">
-                    <p>Rating: 5/5</p>
-                </div>
+            <div id="feed">
             </div>
+
         </section>
     </main>
     <script src="./index.js"></script>
