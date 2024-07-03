@@ -10,15 +10,19 @@ function getReviewsFromLocalStorage() {
 }
 
 function postReview() {
+    const reviewTextElement = document.getElementById('review');
+    const ratingElement = document.querySelector('input[name="rating"]:checked');
     const review = {
-        review: document.getElementById('review').value,
-        rating: document.getElementById('rating').value
+        review: reviewTextElement.value,
+        rating: ratingElement.value
     };
 
     if (!review.review || !review.rating) {
         return;
     }
 
+    reviewTextElement.value = '';
+    ratingElement.checked = false;
     saveReviewToLocalStorage(review, renderReview);
 }
 
@@ -46,7 +50,21 @@ function createCommentCardElement(review) {
     const ratingElement = document.createElement('div');
     ratingElement.className = ['rating'];
     ratingElement.innerHTML = `Rating: ${review.rating}\/5`;
+
+    starRateElement = document.createElement('div');
+
+    for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.innerHTML = '&#9733;';
+        if (i <= review.rating) {
+            star.classList.add('checked');
+        }
+
+        starRateElement.appendChild(star);
+    }
+
     card.appendChild(ratingElement);
+    card.appendChild(starRateElement);
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
