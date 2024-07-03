@@ -1,7 +1,13 @@
-const reviews = [{
-    review: 'Best movie in entire Yugoslav history',
-    rating: 5
-}];
+function saveReviewToLocalStorage(review, renderCallback) {
+    const currentReviews = getReviewsFromLocalStorage();
+    currentReviews.push(review);
+    localStorage.setItem('reviews', JSON.stringify(currentReviews));
+    renderCallback(review);
+}
+
+function getReviewsFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('reviews'));
+}
 
 function postReview() {
     const review = {
@@ -9,21 +15,24 @@ function postReview() {
         rating: document.getElementById('rating').value
     };
 
-    console.log(review);
-
     if (!review.review || !review.rating) {
         return;
     }
 
-    reviews.push(review);
-
-    renderReview(review);
+    saveReviewToLocalStorage(review, renderReview);
 }
 
 function renderReview(review) {
     const commentsFeedElement = document.getElementById('feed');
-    commentsFeedElement.appendChild(createCommentCardElement(review))
+    commentsFeedElement.appendChild(createCommentCardElement(review));
+    calculateAverageRating();
+}
 
+function calculateAverageRating() {
+    const reviews = getReviewsFromLocalStorage();
+    const totalRating = reviews.reduce((acc, review) => acc + Number(review.rating), 0);
+    console.log('Total rating:', totalRating);
+    document.getElementById('average-rating').innerText = `Average rating: ${totalRating / reviews.length}`;
 }
 
 function createCommentCardElement(review) {
@@ -38,7 +47,23 @@ function createCommentCardElement(review) {
     ratingElement.className = ['rating'];
     ratingElement.innerHTML = `Rating: ${review.rating}\/5`;
     card.appendChild(ratingElement);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.onclick = () => {
+        card.remove();
+        deleteReviewFromLocalStorage(review);
+        calculateAverageRating();
+    }
+    deleteButton.classList.add('delete-button');
+    card.appendChild(deleteButton);
     return card;
+}
+
+function deleteReviewFromLocalStorage(review) {
+    const currentReviews = getReviewsFromLocalStorage();
+    const updatedReviews = currentReviews.filter((r) => r.review != review.review && r.rating !== review.rating);
+    localStorage.setItem('reviews', JSON.stringify(updatedReviews));
 }
 
 document.querySelector('form').addEventListener('submit', (event) => {
@@ -47,6 +72,14 @@ document.querySelector('form').addEventListener('submit', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    const reviews = getReviewsFromLocalStorage();
+    if (!reviews || reviews.length === 0) {
+        localStorage.setItem('reviews', JSON.stringify([{
+            review: 'Best movie in entire Yugoslav history',
+            rating: 5
+        }]));
+    }
+
     reviews.forEach((review) => {
         renderReview(review);
     });
