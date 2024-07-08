@@ -44,21 +44,26 @@ export const ReviewForm = ({ addShowReview }: ReviewFormProps) => {
             }}
             onSubmit={(e) => onSubmitHandler(e)}
         >
-            <Card>
+            <Card backgroundColor={'#371686'}>
                 <CardBody display={'flex'} flexDirection={'column'} gap={4}>
                     <Input
                         id="review-input"
-                        variant={'outline'}
+                        variant={'filled'}
                         placeholder="Add your review"
+                        _focus={{ color: 'white' }}
+                        _active={{ color: 'white' }}
                     />
 
                     <Input
                         id="rating-input"
-                        variant={'outline'}
+                        variant={'filled'}
                         type="number"
                         min={1}
                         max={5}
-                        placeholder="Add your rating"
+                        width={'30%'}
+                        placeholder="Rating"
+                        _focus={{ color: 'white' }}
+                        _active={{ color: 'white' }}
                     />
 
                     <Button type="submit">Submit review</Button>

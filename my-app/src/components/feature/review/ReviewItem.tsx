@@ -10,7 +10,7 @@ export type ReviewItemProps = {
 export const ReviewItem = ({ review, onDelete }: ReviewItemProps) => {
     return (
         <div style={{ display: 'flex', width: '480px' }}>
-            <Card w={'100%'}>
+            <Card w={'100%'} backgroundColor={'#371686'} color={'white'}>
                 <CardHeader>
                     <p>{review.email}</p>
                 </CardHeader>

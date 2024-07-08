@@ -7,10 +7,4 @@
     padding-bottom: 40px;
     gap: 24px;
     min-height: 100vh;
-
-    .review-item-form {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
 }
