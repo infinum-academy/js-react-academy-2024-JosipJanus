@@ -1,17 +1,24 @@
 import { Show } from '@/types/show.type';
 import { Card, CardBody, CardFooter, Flex, Heading } from '@chakra-ui/react';
 import Image from 'next/image';
+export type ShowDetailsProps = {
+    showDetails: Show;
+    showRating: number;
+};
 
-export default function ShowDetails(show: Show) {
+export default function ShowDetails({
+    showDetails: { title, description, imageUrl },
+    showRating,
+}: ShowDetailsProps) {
     return (
         <Card overflow={'hidden'} width={480}>
             <Flex direction={'column'}>
                 <CardBody padding={0}>
-                    {show.imageUrl ? (
+                    {imageUrl ? (
                         <Image
                             width={480}
                             height={640}
-                            src={show.imageUrl ?? ''}
+                            src={imageUrl ?? ''}
                             alt="Tko pjeva zlo ne misli"
                         />
                     ) : (
@@ -24,12 +31,12 @@ export default function ShowDetails(show: Show) {
                     )}
                 </CardBody>
                 <CardFooter display={'flex'} flexDirection={'column'}>
-                    <Heading as={'h2'}>{show.title}</Heading>
-                    <div>{show.description}</div>
-                    {show.averageRating ? (
-                        <div>Rating: {show.averageRating}</div>
+                    <Heading as={'h2'}>{title}</Heading>
+                    <div>{description}</div>
+                    {showRating !== 0 ? (
+                        <strong>Rating: {showRating}</strong>
                     ) : (
-                        <div>No rating</div>
+                        <strong>No rating</strong>
                     )}
                 </CardFooter>
             </Flex>

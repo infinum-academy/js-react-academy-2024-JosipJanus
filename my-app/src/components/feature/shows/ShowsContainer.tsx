@@ -1,22 +1,11 @@
 'use client';
 import { Review } from '@/types/review.type';
-import { Show } from '@/types/show.type';
 import { Fragment, useEffect, useState } from 'react';
 import { ShowReviewSection } from '../review/ShowReviewSection';
 import ShowDetails from './ShowDetails';
+import { initialShowDetails } from '@/shared/utils/initial-show-details';
 
 const REVIEWS_KEY = 'reviews';
-
-const show: Show = {
-    title: 'One song a day takes mischief away',
-    description: `The story is seen through the eyes of 6 year old Perica Safranek. On a family picnic Perica's
-    mother starts flirting with Mr Fulir, a Zagreb Dandy. The father at first doesn't notice it, but wants
-    to marry off the aunt. After a couple of invitations to their Zagreb home, the father becomes aware
-    of Fulir's passes at his wife...`,
-    imageUrl:
-        'https://m.media-amazon.com/images/M/MV5BYTY1MzA0Y2ItOWUwMy00ZDA1LWI1NGQtMDlhYjBkYzRiNTVmXkEyXkFqcGdeQXVyMjI2NDIxNjI@._V1_FMjpg_UY644_.jpg',
-    averageRating: 4.5,
-};
 
 const initialReviews: Array<Review> = [
     {
@@ -29,14 +18,25 @@ const initialReviews: Array<Review> = [
 
 export const ShowsContainer = () => {
     const [reviewList, setReviewList] = useState(initialReviews);
+    const [rating, setShowRating] = useState(0);
 
     useEffect(() => {
         const loadedReviews = loadFromLocalStorage();
         setReviewList(loadedReviews);
+
+        setShowRating(calculateAverageRating(loadedReviews));
     }, []);
 
     const saveToLocalStorage = (reviewList: Array<Review>) => {
         localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviewList));
+    };
+
+    const calculateAverageRating = (reviews: Array<Review>): number => {
+        if (reviews.length === 0) return 0;
+        return (
+            reviews.reduce((acc, review) => acc + review.rating, 0) /
+            reviews.length
+        );
     };
 
     const loadFromLocalStorage = (): Array<Review> => {
@@ -51,6 +51,7 @@ export const ShowsContainer = () => {
         const reviews = loadFromLocalStorage();
         reviews.push(review);
         setReviewList(reviews);
+        setShowRating(calculateAverageRating(reviews));
         saveToLocalStorage(reviews);
     };
 
@@ -58,12 +59,15 @@ export const ShowsContainer = () => {
         const reviews = loadFromLocalStorage();
         const newReviews = reviews.filter((r) => r.id !== id);
         setReviewList(newReviews);
+        setShowRating(calculateAverageRating(newReviews));
         saveToLocalStorage(newReviews);
     };
 
     return (
         <Fragment>
-            <ShowDetails {...show} />
+            <ShowDetails
+                {...{ showDetails: initialShowDetails(), showRating: rating }}
+            />
             <ShowReviewSection
                 onAddShowReview={onAddShowReview}
                 onDeleteReview={onDeleteShowReview}
