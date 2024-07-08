@@ -6,13 +6,14 @@ function saveReviewToLocalStorage(review, renderCallback) {
 }
 
 function getReviewsFromLocalStorage() {
-    return JSON.parse(localStorage.getItem('reviews'));
+    return JSON.parse(localStorage.getItem('reviews')) ?? [];
 }
 
 function postReview() {
     const reviewTextElement = document.getElementById('review');
     const ratingElement = document.querySelector('input[name="rating"]:checked');
     const review = {
+        id: crypto.randomUUID(),
         review: reviewTextElement.value,
         rating: ratingElement.value
     };
@@ -34,8 +35,11 @@ function renderReview(review) {
 
 function calculateAverageRating() {
     const reviews = getReviewsFromLocalStorage();
-    const totalRating = reviews.reduce((acc, review) => acc + Number(review.rating), 0);
-    console.log('Total rating:', totalRating);
+    const totalRating = reviews.reduce((acc, review) => acc + parseInt(review.rating), 0);
+    if (reviews.length === 0) {
+        document.getElementById('average-rating').innerText = `No rating!`;
+        return;
+    }
     document.getElementById('average-rating').innerText = `Average rating: ${totalRating / reviews.length}`;
 }
 
@@ -80,7 +84,7 @@ function createCommentCardElement(review) {
 
 function deleteReviewFromLocalStorage(review) {
     const currentReviews = getReviewsFromLocalStorage();
-    const updatedReviews = currentReviews.filter((r) => r.review != review.review && r.rating !== review.rating);
+    const updatedReviews = currentReviews.filter((r) => r.id != review.id);
     localStorage.setItem('reviews', JSON.stringify(updatedReviews));
 }
 
@@ -91,12 +95,6 @@ document.querySelector('form').addEventListener('submit', (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const reviews = getReviewsFromLocalStorage();
-    if (!reviews || reviews.length === 0) {
-        localStorage.setItem('reviews', JSON.stringify([{
-            review: 'Best movie in entire Yugoslav history',
-            rating: 5
-        }]));
-    }
 
     reviews.forEach((review) => {
         renderReview(review);
