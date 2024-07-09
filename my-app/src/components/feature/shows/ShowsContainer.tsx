@@ -1,30 +1,26 @@
 'use client';
+import { initialShowDetails } from '@/shared/utils/initial-show-details';
 import { Review } from '@/types/review.type';
+import { IShow } from '@/types/show.type';
 import { Fragment, useEffect, useState } from 'react';
 import { ShowReviewSection } from '../review/ShowReviewSection';
 import ShowDetails from './ShowDetails';
-import { initialShowDetails } from '@/shared/utils/initial-show-details';
+import { init } from 'next/dist/compiled/webpack/webpack';
 
 const REVIEWS_KEY = 'reviews';
 
-const initialReviews: Array<Review> = [
-    {
-        id: '1',
-        rating: 5,
-        review: 'Great movie!',
-        email: 'john.doe@somemail.com',
-    },
-];
-
 export const ShowsContainer = () => {
-    const [reviewList, setReviewList] = useState(initialReviews);
-    const [rating, setShowRating] = useState(0);
+    const [reviewList, setReviewList] = useState([] as Array<Review>);
+    const [show, setShow] = useState<IShow>(initialShowDetails());
 
     useEffect(() => {
         const loadedReviews = loadFromLocalStorage();
         setReviewList(loadedReviews);
 
-        setShowRating(calculateAverageRating(loadedReviews));
+        setShow({
+            ...initialShowDetails(),
+            averageRating: calculateAverageRating(loadedReviews),
+        });
     }, []);
 
     const saveToLocalStorage = (reviewList: Array<Review>) => {
@@ -51,7 +47,10 @@ export const ShowsContainer = () => {
         const reviews = loadFromLocalStorage();
         reviews.push(review);
         setReviewList(reviews);
-        setShowRating(calculateAverageRating(reviews));
+        setShow({
+            ...initialShowDetails(),
+            averageRating: calculateAverageRating(reviews),
+        });
         saveToLocalStorage(reviews);
     };
 
@@ -59,15 +58,16 @@ export const ShowsContainer = () => {
         const reviews = loadFromLocalStorage();
         const newReviews = reviews.filter((r) => r.id !== id);
         setReviewList(newReviews);
-        setShowRating(calculateAverageRating(newReviews));
+        setShow({
+            ...initialShowDetails(),
+            averageRating: calculateAverageRating(newReviews),
+        });
         saveToLocalStorage(newReviews);
     };
 
     return (
         <Fragment>
-            <ShowDetails
-                {...{ showDetails: initialShowDetails(), showRating: rating }}
-            />
+            <ShowDetails showDetails={show} />
             <ShowReviewSection
                 onAddShowReview={onAddShowReview}
                 onDeleteReview={onDeleteShowReview}

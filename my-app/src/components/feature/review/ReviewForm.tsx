@@ -1,23 +1,21 @@
+import { StarRating } from '@/shared/components/StarRating';
 import { generateRandomEmailAddress } from '@/shared/utils/random-email.generator';
 import { Review } from '@/types/review.type';
-import { Container } from '@chakra-ui/layout';
-import { Button, Card, CardBody, Input } from '@chakra-ui/react';
-import { FormEvent } from 'react';
+import { Box, Button, Card, CardBody, Input } from '@chakra-ui/react';
+import { FormEvent, useState } from 'react';
 
 export type ReviewFormProps = {
     addShowReview: (review: Review) => void;
 };
 
 export const ReviewForm = ({ addShowReview }: ReviewFormProps) => {
+    const [rating, setRating] = useState<number>(0);
+
     const onSubmitHandler = (event: FormEvent) => {
         event.preventDefault();
         const reviewInputElement = document.getElementById(
             'review-input'
         ) as HTMLFormElement;
-
-        const reviewRatingElement = document.getElementById(
-            'rating-input'
-        ) as HTMLInputElement;
 
         const value = reviewInputElement.value;
 
@@ -25,24 +23,22 @@ export const ReviewForm = ({ addShowReview }: ReviewFormProps) => {
             id: crypto.randomUUID().toString(),
             email: generateRandomEmailAddress(),
             review: value,
-            rating: parseInt(reviewRatingElement.value),
+            rating,
         };
 
         addShowReview(newReview);
-        console.log('Adding new review');
+        setRating(0);
         reviewInputElement.value = '';
-        reviewRatingElement.value = '';
     };
 
     return (
-        <form
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '16px',
-                width: '480px',
-            }}
-            onSubmit={(e) => onSubmitHandler(e)}
+        <Box
+            display="flex"
+            flexDir="column"
+            gap={4}
+            min-width="480px"
+            as="form"
+            onSubmit={(e: FormEvent) => onSubmitHandler(e)}
         >
             <Card backgroundColor={'#371686'}>
                 <CardBody display={'flex'} flexDirection={'column'} gap={4}>
@@ -54,21 +50,11 @@ export const ReviewForm = ({ addShowReview }: ReviewFormProps) => {
                         _active={{ color: 'white' }}
                     />
 
-                    <Input
-                        id="rating-input"
-                        variant={'filled'}
-                        type="number"
-                        min={1}
-                        max={5}
-                        width={'30%'}
-                        placeholder="Rating"
-                        _focus={{ color: 'white' }}
-                        _active={{ color: 'white' }}
-                    />
+                    <StarRating rating={rating} onChange={setRating} />
 
                     <Button type="submit">Submit review</Button>
                 </CardBody>
             </Card>
-        </form>
+        </Box>
     );
 };
