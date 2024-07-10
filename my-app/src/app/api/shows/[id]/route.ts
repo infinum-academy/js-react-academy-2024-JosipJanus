@@ -9,7 +9,7 @@ export async function GET(
     { params }: { params: { id: string } }
 ) {
     if (params.id) {
-        const show = showsJson.todoLists.find(
+        const show = showsJson.shows.find(
             (show: IShow) => show.id === params.id
         );
 

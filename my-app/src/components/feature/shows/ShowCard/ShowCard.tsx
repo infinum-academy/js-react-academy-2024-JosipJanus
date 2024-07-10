@@ -8,8 +8,10 @@ import {
     Text,
 } from '@chakra-ui/react';
 import Image from 'next/image';
+import NextLink from 'next/link';
 
 export interface IShowProps {
+    id: string;
     title: string;
     description: string;
     image_url: string;
@@ -17,13 +19,19 @@ export interface IShowProps {
 }
 
 export const ShowCard = ({
+    id,
     title,
     description,
     image_url,
     average_rating,
 }: IShowProps) => {
     return (
-        <Card overflow={'hidden'} width={240}>
+        <Card
+            as={NextLink}
+            overflow={'hidden'}
+            width={240}
+            href={`/shows/${id}`}
+        >
             <Flex direction={'column'}>
                 <CardBody padding={0}>
                     {
@@ -48,7 +56,9 @@ export const ShowCard = ({
                     </Text>
                     <Box>{description}</Box>
                     {average_rating !== 0 ? (
-                        <Text>Rating: {average_rating}</Text>
+                        <Text>
+                            Rating: <Text id="rating">{average_rating}</Text>
+                        </Text>
                     ) : (
                         <Text>No rating</Text>
                     )}

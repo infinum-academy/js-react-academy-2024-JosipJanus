@@ -1,7 +1,7 @@
 'use client';
 
-import { Box } from '@chakra-ui/react';
+import { TopRatedSection } from '@/components/feature/shows/TopRatedSection';
 
 export default function TopRatedPage() {
-    return <Box>Top Rated</Box>;
+    return <TopRatedSection padding={24} />;
 }

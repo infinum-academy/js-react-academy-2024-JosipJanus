@@ -5,12 +5,17 @@ import { IShow } from '@/types/show.type';
 import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { ShowReviewSection } from '../review/ShowReviewSection';
+import { ShowDetails } from './ShowDetails';
 
 const REVIEWS_KEY = 'reviews';
 
-export const ShowsContainer = () => {
+export interface IShowContainerProps {
+    showDetails: IShow;
+}
+
+export const ShowsContainer = ({ showDetails }: IShowContainerProps) => {
     const [reviewList, setReviewList] = useState([] as Array<Review>);
-    const [show, setShow] = useState<IShow>(initialShowDetails());
+    const [show, setShow] = useState<IShow>(showDetails);
 
     useEffect(() => {
         const loadedReviews = loadFromLocalStorage();
@@ -66,7 +71,7 @@ export const ShowsContainer = () => {
 
     return (
         <Flex flexDirection="column" gap={10}>
-            {/* <ShowDetails showDetails={show} /> TODO: Move to separate route */}
+            <ShowDetails showDetails={show} /> TODO: Move to separate route
             <ShowReviewSection
                 onAddShowReview={onAddShowReview}
                 onDeleteReview={onDeleteShowReview}

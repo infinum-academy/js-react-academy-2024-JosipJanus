@@ -2,5 +2,5 @@
 import { ShowDetailsSection } from '@/components/feature/shows/ShowDetailsSection';
 
 export default function ShowDetailsPage() {
-    return <ShowDetailsSection />;
+    return <ShowDetailsSection padding={24} />;
 }

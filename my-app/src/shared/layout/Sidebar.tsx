@@ -1,4 +1,5 @@
 import { Box, Flex, Link } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 const navigationItems = [
     {
@@ -31,17 +32,17 @@ export const Sidebar = () => {
         >
             <Box>
                 <Box backgroundColor="#1B004C" padding={6} width="300px">
-                    <Link href={'all-shows'}>All shows</Link>
+                    <NextLink href={'/shows'}>All shows</NextLink>
                 </Box>
                 <Box backgroundColor="#1B004C" padding={6} width="300px">
-                    <Link href={'Top rated'}>Top rated</Link>
+                    <NextLink href={'/top-rated'}>Top rated</NextLink>
                 </Box>
                 <Box backgroundColor="#1B004C" padding={6} width="300px">
-                    <Link href={'my-profile'}>My profile</Link>
+                    <NextLink href={'/my-profile'}>My profile</NextLink>
                 </Box>
             </Box>
             <Box backgroundColor="#1B004C" padding={6} width="300px">
-                <Link href={'logout'}>Logout</Link>
+                <NextLink href={'/logout'}>Logout</NextLink>
             </Box>
         </Flex>
     );
