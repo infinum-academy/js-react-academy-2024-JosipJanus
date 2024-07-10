@@ -1,7 +1,7 @@
 import { StarRating } from '@/shared/components/StarRating';
 import { generateRandomEmailAddress } from '@/shared/utils/random-email.generator';
 import { Review } from '@/types/review.type';
-import { Box, Button, Card, CardBody, Input } from '@chakra-ui/react';
+import { Box, Button, Card, CardBody, Flex, Input } from '@chakra-ui/react';
 import { FormEvent, useState } from 'react';
 
 export type ReviewFormProps = {
@@ -38,21 +38,25 @@ export const ReviewForm = ({ addShowReview }: ReviewFormProps) => {
             gap={4}
             min-width="480px"
             as="form"
-            onSubmit={(e: FormEvent) => onSubmitHandler(e)}
+            onSubmit={onSubmitHandler}
         >
-            <Card backgroundColor={'#371686'}>
-                <CardBody display={'flex'} flexDirection={'column'} gap={4}>
-                    <Input
-                        id="review-input"
-                        variant={'filled'}
-                        placeholder="Add your review"
-                        _focus={{ color: 'white' }}
-                        _active={{ color: 'white' }}
-                    />
+            <Card backgroundColor="#371686">
+                <CardBody width="480px">
+                    <Flex flexDirection="column" gap={4}>
+                        <Input
+                            id="review-input"
+                            variant="filled"
+                            placeholder="Add your review"
+                            _focus={{ color: 'white' }}
+                            _active={{ color: 'white' }}
+                        />
 
-                    <StarRating rating={rating} onChange={setRating} />
+                        <StarRating rating={rating} onChange={setRating} />
 
-                    <Button type="submit">Submit review</Button>
+                        <Button type="submit" width="fit-content">
+                            Submit review
+                        </Button>
+                    </Flex>
                 </CardBody>
             </Card>
         </Box>
