@@ -2,10 +2,10 @@
 import { initialShowDetails } from '@/shared/utils/initial-show-details';
 import { Review } from '@/types/review.type';
 import { IShow } from '@/types/show.type';
-import { Fragment, useEffect, useState } from 'react';
+import { Flex } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { ShowReviewSection } from '../review/ShowReviewSection';
 import ShowDetails from './ShowDetails';
-import { init } from 'next/dist/compiled/webpack/webpack';
 
 const REVIEWS_KEY = 'reviews';
 
@@ -66,13 +66,13 @@ export const ShowsContainer = () => {
     };
 
     return (
-        <Fragment>
+        <Flex flexDirection="column" gap={10}>
             <ShowDetails showDetails={show} />
             <ShowReviewSection
                 onAddShowReview={onAddShowReview}
                 onDeleteReview={onDeleteShowReview}
                 reviews={reviewList}
             />
-        </Fragment>
+        </Flex>
     );
 };
