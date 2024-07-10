@@ -1,7 +1,8 @@
-import { Show } from '@/types/show.type';
+import { IShow } from '@/types/show.type';
 
-export function initialShowDetails(): Show {
+export function initialShowDetails(): IShow {
     return {
+        id: '1',
         title: 'One song a day takes mischief away',
         description: `The story is seen through the eyes of 6 year old Perica Safranek. On a family picnic Perica's
     mother starts flirting with Mr Fulir, a Zagreb Dandy. The father at first doesn't notice it, but wants

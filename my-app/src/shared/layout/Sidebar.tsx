@@ -18,53 +18,29 @@ const navigationItems = [
         text: 'My profile',
     },
 ];
-
+// TODO: Why not full height ???
 export const Sidebar = () => {
     return (
         <Flex
             flexDirection="column"
-            h="100%"
+            height="100%"
             backgroundColor="#1B004C"
             padding={2}
             color="white"
             max-width="300px"
         >
             <Box>
-                <Box
-                    flexDirection="column"
-                    h="100%"
-                    backgroundColor="#1B004C"
-                    padding={6}
-                    width="300px"
-                >
+                <Box backgroundColor="#1B004C" padding={6} width="300px">
                     <Link href={'all-shows'}>All shows</Link>
                 </Box>
-                <Box
-                    flexDirection="column"
-                    h="100%"
-                    backgroundColor="#1B004C"
-                    padding={6}
-                    width="300px"
-                >
+                <Box backgroundColor="#1B004C" padding={6} width="300px">
                     <Link href={'Top rated'}>Top rated</Link>
                 </Box>
-                <Box
-                    flexDirection="column"
-                    h="100%"
-                    backgroundColor="#1B004C"
-                    padding={6}
-                    width="300px"
-                >
+                <Box backgroundColor="#1B004C" padding={6} width="300px">
                     <Link href={'my-profile'}>My profile</Link>
                 </Box>
             </Box>
-            <Box
-                flexDirection="column"
-                h="100%"
-                backgroundColor="#1B004C"
-                padding={6}
-                width="300px"
-            >
+            <Box backgroundColor="#1B004C" padding={6} width="300px">
                 <Link href={'logout'}>Logout</Link>
             </Box>
         </Flex>

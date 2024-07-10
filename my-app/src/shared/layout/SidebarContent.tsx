@@ -1,7 +1,6 @@
-import { ShowsContainer } from '@/components/feature/shows/ShowsContainer';
 import { Flex } from '@chakra-ui/react';
 
-export const SideBarContent = () => {
+export const SidebarContent = ({ children }: { children: React.ReactNode }) => {
     return (
         <Flex
             h="100%"
@@ -9,7 +8,7 @@ export const SideBarContent = () => {
             backgroundColor="#1B004C"
             justifyContent="center"
         >
-            <ShowsContainer />
+            {children}
         </Flex>
     );
 };

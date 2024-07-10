@@ -9,13 +9,14 @@ import {
     Text,
 } from '@chakra-ui/react';
 import Image from 'next/image';
+
 export type ShowDetailsProps = {
     showDetails: IShow;
 };
 
-export default function ShowDetails({
+export const ShowDetails = ({
     showDetails: { title, description, imageUrl, averageRating },
-}: ShowDetailsProps) {
+}: ShowDetailsProps) => {
     return (
         <Card overflow={'hidden'} width={480}>
             <Flex direction={'column'}>
@@ -48,4 +49,4 @@ export default function ShowDetails({
             </Flex>
         </Card>
     );
-}
+};

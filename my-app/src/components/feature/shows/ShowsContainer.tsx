@@ -5,7 +5,6 @@ import { IShow } from '@/types/show.type';
 import { Flex } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { ShowReviewSection } from '../review/ShowReviewSection';
-import ShowDetails from './ShowDetails';
 
 const REVIEWS_KEY = 'reviews';
 
@@ -67,7 +66,7 @@ export const ShowsContainer = () => {
 
     return (
         <Flex flexDirection="column" gap={10}>
-            <ShowDetails showDetails={show} />
+            {/* <ShowDetails showDetails={show} /> TODO: Move to separate route */}
             <ShowReviewSection
                 onAddShowReview={onAddShowReview}
                 onDeleteReview={onDeleteShowReview}

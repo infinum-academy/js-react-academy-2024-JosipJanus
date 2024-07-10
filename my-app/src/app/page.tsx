@@ -1,14 +1,14 @@
-import { ShowsContainer } from '@/components/feature/shows/ShowsContainer';
-import styles from './page.module.css';
-import { Sidebar } from './sidebar';
+'use client';
+
+import { useRedirect } from '@/hooks/useRedirect';
 import { Box } from '@chakra-ui/react';
-import { SideBarContent } from './sidebarcontent';
 
 export default function Home() {
-    return (
-        <Box as="main" className={styles.main}>
-            <Sidebar />
-            <SideBarContent />
-        </Box>
-    );
+    const isRunning = useRedirect('/all-shows', true);
+
+    if (isRunning) {
+        return <Box color="white">Loading stuff....</Box>;
+    }
+
+    return null;
 }
