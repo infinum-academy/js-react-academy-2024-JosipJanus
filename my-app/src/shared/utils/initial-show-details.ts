@@ -8,8 +8,8 @@ export function initialShowDetails(): IShow {
     mother starts flirting with Mr Fulir, a Zagreb Dandy. The father at first doesn't notice it, but wants
     to marry off the aunt. After a couple of invitations to their Zagreb home, the father becomes aware
     of Fulir's passes at his wife...`,
-        imageUrl:
+        image_url:
             'https://m.media-amazon.com/images/M/MV5BYTY1MzA0Y2ItOWUwMy00ZDA1LWI1NGQtMDlhYjBkYzRiNTVmXkEyXkFqcGdeQXVyMjI2NDIxNjI@._V1_FMjpg_UY644_.jpg',
-        averageRating: undefined,
+        average_rating: undefined,
     };
 }

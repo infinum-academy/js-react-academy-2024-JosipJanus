@@ -12,15 +12,15 @@ import Image from 'next/image';
 export interface IShowProps {
     title: string;
     description: string;
-    imageUrl: string;
-    averageRating: number;
+    image_url: string;
+    average_rating: number;
 }
 
 export const ShowCard = ({
     title,
     description,
-    imageUrl,
-    averageRating,
+    image_url,
+    average_rating,
 }: IShowProps) => {
     return (
         <Card overflow={'hidden'} width={240}>
@@ -31,11 +31,11 @@ export const ShowCard = ({
                             width={240}
                             height={420}
                             src={
-                                imageUrl ??
+                                image_url ??
                                 'https://fakeimg.pl/640x480?text=Placeholder'
                             }
                             alt={
-                                imageUrl
+                                image_url
                                     ? 'Tko pjeva zlo ne misli'
                                     : 'Placeholder image'
                             }
@@ -47,8 +47,8 @@ export const ShowCard = ({
                         {title}
                     </Text>
                     <Box>{description}</Box>
-                    {averageRating !== 0 ? (
-                        <Text>Rating: {averageRating}</Text>
+                    {average_rating !== 0 ? (
+                        <Text>Rating: {average_rating}</Text>
                     ) : (
                         <Text>No rating</Text>
                     )}

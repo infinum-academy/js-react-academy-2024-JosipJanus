@@ -15,7 +15,7 @@ export type ShowDetailsProps = {
 };
 
 export const ShowDetails = ({
-    showDetails: { title, description, imageUrl, averageRating },
+    showDetails: { title, description, image_url, average_rating },
 }: ShowDetailsProps) => {
     return (
         <Card overflow={'hidden'} width={480}>
@@ -26,11 +26,11 @@ export const ShowDetails = ({
                             width={480}
                             height={640}
                             src={
-                                imageUrl ??
+                                image_url ??
                                 'https://fakeimg.pl/640x480?text=Placeholder'
                             }
                             alt={
-                                imageUrl
+                                image_url
                                     ? 'Tko pjeva zlo ne misli'
                                     : 'Placeholder image'
                             }
@@ -40,8 +40,8 @@ export const ShowDetails = ({
                 <CardFooter display={'flex'} flexDirection={'column'}>
                     <Heading as={'h2'}>{title}</Heading>
                     <Box>{description}</Box>
-                    {averageRating !== 0 ? (
-                        <Text>Rating: {averageRating}</Text>
+                    {average_rating !== 0 ? (
+                        <Text>Rating: {average_rating}</Text>
                     ) : (
                         <Text>No rating</Text>
                     )}

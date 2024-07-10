@@ -18,7 +18,7 @@ export const ShowsContainer = () => {
 
         setShow({
             ...initialShowDetails(),
-            averageRating: calculateAverageRating(loadedReviews),
+            average_rating: calculateaverage_rating(loadedReviews),
         });
     }, []);
 
@@ -26,7 +26,7 @@ export const ShowsContainer = () => {
         localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviewList));
     };
 
-    const calculateAverageRating = (reviews: Array<Review>): number => {
+    const calculateaverage_rating = (reviews: Array<Review>): number => {
         if (reviews.length === 0) return 0;
         return (
             reviews.reduce((acc, review) => acc + review.rating, 0) /
@@ -48,7 +48,7 @@ export const ShowsContainer = () => {
         setReviewList(reviews);
         setShow({
             ...initialShowDetails(),
-            averageRating: calculateAverageRating(reviews),
+            average_rating: calculateaverage_rating(reviews),
         });
         saveToLocalStorage(reviews);
     };
@@ -59,7 +59,7 @@ export const ShowsContainer = () => {
         setReviewList(newReviews);
         setShow({
             ...initialShowDetails(),
-            averageRating: calculateAverageRating(newReviews),
+            average_rating: calculateaverage_rating(newReviews),
         });
         saveToLocalStorage(newReviews);
     };
