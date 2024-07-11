@@ -39,10 +39,7 @@ export default function ShowDetails({
                 <CardFooter display={'flex'} flexDirection={'column'}>
                     <Heading as={'h2'}>{title}</Heading>
                     <Box>{description}</Box>
-                    {averageRating !== 0 ? (
-                        <Text>Rating: {averageRating}</Text>
-                    ) : (
-                        <Text>No rating</Text>
+                        <Text>{averageRating !== 0 ? `Rating: ${averageRating}` : 'No rating'}</Text>
                     )}
                 </CardFooter>
             </Flex>
