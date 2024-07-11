@@ -16,7 +16,7 @@ export const ReviewItem = ({ review, onDelete }: ReviewItemProps) => {
         <Flex w="480px">
             <Card w="100%" backgroundColor="#371686" color="white">
                 <CardHeader>
-                    <p>{review.email}</p>
+                    <Text>{review.email}</Text>
                 </CardHeader>
                 <CardBody>
                     <Box>
