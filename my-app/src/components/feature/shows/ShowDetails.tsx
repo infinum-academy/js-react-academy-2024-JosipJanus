@@ -17,8 +17,8 @@ export default function ShowDetails({
     showDetails: { title, description, imageUrl, averageRating },
 }: ShowDetailsProps) {
     return (
-        <Card overflow={'hidden'} width={480}>
-            <Flex direction={'column'}>
+        <Card overflow="hidden" width={480}>
+            <Flex direction="column">
                 <CardBody padding={0}>
                     {
                         <Image
@@ -36,11 +36,14 @@ export default function ShowDetails({
                         />
                     }
                 </CardBody>
-                <CardFooter display={'flex'} flexDirection={'column'}>
-                    <Heading as={'h2'}>{title}</Heading>
+                <CardFooter display="flex" flexDirection="column">
+                    <Heading as="h2">{title}</Heading>
                     <Box>{description}</Box>
-                        <Text>{averageRating !== 0 ? `Rating: ${averageRating}` : 'No rating'}</Text>
-                    )}
+                    <Text>
+                        {averageRating !== 0
+                            ? `Rating: ${averageRating}`
+                            : 'No rating'}
+                    </Text>
                 </CardFooter>
             </Flex>
         </Card>

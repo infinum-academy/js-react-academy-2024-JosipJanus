@@ -1,7 +1,7 @@
 import { StarRating } from '@/shared/components/StarRating';
 import { Review } from '@/types/review.type';
 import { Card, CardBody, CardFooter, CardHeader } from '@chakra-ui/card';
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
 export type ReviewItemProps = {
