@@ -24,7 +24,7 @@ export const ShowDetails = ({
                     {
                         <Image
                             width={480}
-                            height={640}
+                            height={480}
                             src={
                                 image_url ??
                                 'https://fakeimg.pl/640x480?text=Placeholder'
@@ -41,7 +41,7 @@ export const ShowDetails = ({
                     <Heading as={'h2'}>{title}</Heading>
                     <Box>{description}</Box>
                     {average_rating !== 0 ? (
-                        <Text>Rating: {average_rating}</Text>
+                        <Text fontWeight="bold">Rating: {average_rating}</Text>
                     ) : (
                         <Text>No rating</Text>
                     )}

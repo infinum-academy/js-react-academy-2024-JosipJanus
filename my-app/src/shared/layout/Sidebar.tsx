@@ -30,6 +30,9 @@ export const Sidebar = () => {
             color="white"
             max-width="300px"
         >
+            <Box fontWeight="bold" padding={2}>
+                TV shows app
+            </Box>
             <Box>
                 <Box backgroundColor="#1B004C" padding={6} width="300px">
                     <NextLink href={'/shows'}>All shows</NextLink>

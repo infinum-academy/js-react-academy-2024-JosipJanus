@@ -15,7 +15,6 @@ export const ShowList = ({ shows }: IShowListProps) => {
                         key={index}
                         id={show.id}
                         title={show.title}
-                        description={show.description}
                         image_url={show.image_url ?? ''}
                         average_rating={show.average_rating ?? 0}
                     />

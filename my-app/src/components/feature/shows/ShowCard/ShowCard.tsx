@@ -1,3 +1,4 @@
+import { StarIcon } from '@chakra-ui/icons';
 import {
     Box,
     Card,
@@ -13,7 +14,6 @@ import NextLink from 'next/link';
 export interface IShowProps {
     id: string;
     title: string;
-    description: string;
     image_url: string;
     average_rating: number;
 }
@@ -21,16 +21,16 @@ export interface IShowProps {
 export const ShowCard = ({
     id,
     title,
-    description,
     image_url,
     average_rating,
 }: IShowProps) => {
     return (
         <Card
             as={NextLink}
-            overflow={'hidden'}
+            overflow="hidden"
             width={240}
             href={`/shows/${id}`}
+            borderRadius={24}
         >
             <Flex direction={'column'}>
                 <CardBody padding={0}>
@@ -54,14 +54,10 @@ export const ShowCard = ({
                     <Text fontWeight="bold" as={'h2'}>
                         {title}
                     </Text>
-                    <Box>{description}</Box>
-                    {average_rating !== 0 ? (
-                        <Text>
-                            Rating: <Text id="rating">{average_rating}</Text>
-                        </Text>
-                    ) : (
-                        <Text>No rating</Text>
-                    )}
+                    <Box as="span" display="flex" alignItems="center" gap={2}>
+                        <StarIcon color="gold" />
+                        <Text as="span">{average_rating}/5</Text>
+                    </Box>
                 </CardFooter>
             </Flex>
         </Card>

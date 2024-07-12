@@ -3,5 +3,5 @@
 import { TopRatedSection } from '@/components/feature/shows/TopRatedSection';
 
 export default function TopRatedPage() {
-    return <TopRatedSection padding={24} />;
+    return <TopRatedSection padding={6} />;
 }

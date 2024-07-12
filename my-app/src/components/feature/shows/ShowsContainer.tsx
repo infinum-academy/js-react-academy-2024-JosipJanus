@@ -22,7 +22,7 @@ export const ShowsContainer = ({ showDetails }: IShowContainerProps) => {
         setReviewList(loadedReviews);
 
         setShow({
-            ...initialShowDetails(),
+            ...showDetails,
             average_rating: calculateaverage_rating(loadedReviews),
         });
     }, []);
@@ -71,7 +71,7 @@ export const ShowsContainer = ({ showDetails }: IShowContainerProps) => {
 
     return (
         <Flex flexDirection="column" gap={10}>
-            <ShowDetails showDetails={show} /> TODO: Move to separate route
+            <ShowDetails showDetails={show} />
             <ShowReviewSection
                 onAddShowReview={onAddShowReview}
                 onDeleteReview={onDeleteShowReview}
