@@ -12,7 +12,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" style={{ height: '100%' }}>
             <body
                 className={inter.className}
                 style={{
@@ -20,6 +20,7 @@ export default function RootLayout({
                     padding: '0',
                     margin: '0',
                     display: 'flex',
+                    height: '100%',
                 }}
             >
                 <Providers>

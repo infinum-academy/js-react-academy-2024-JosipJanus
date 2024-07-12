@@ -29,11 +29,12 @@ export const Sidebar = () => {
             padding={2}
             color="white"
             max-width="300px"
+            justify={'space-between'}
         >
-            <Box fontWeight="bold" padding={2}>
-                TV shows app
-            </Box>
             <Box>
+                <Box fontWeight="bold" padding={2}>
+                    TV shows app
+                </Box>
                 <Box backgroundColor="#1B004C" padding={6} width="300px">
                     <NextLink href={'/shows'}>All shows</NextLink>
                 </Box>

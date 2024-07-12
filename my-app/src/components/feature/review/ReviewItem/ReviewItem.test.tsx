@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { ReviewItem } from './ReviewItem';
 
-describe('ReviewItem', () => {
+fdescribe('ReviewItem', () => {
     const mockReview = {
         email: 'emajl@servis.com',
         id: '1',
@@ -11,6 +11,7 @@ describe('ReviewItem', () => {
 
     it('should render review item', () => {
         render(<ReviewItem review={mockReview} onDelete={() => {}} />);
+        expect(screen.getByTestId('review-item')).toBeInTheDocument();
     });
 
     it('should render delete button', () => {
@@ -33,6 +34,6 @@ describe('ReviewItem', () => {
         render(<ReviewItem review={mockReview} onDelete={onDelete} />);
         const deleteButton = screen.getByText('Delete');
         deleteButton.click();
-        expect(onDelete).toBeCalledWith(mockReview.id);
+        expect(onDelete).toHaveBeenCalledWith(mockReview.id);
     });
 });

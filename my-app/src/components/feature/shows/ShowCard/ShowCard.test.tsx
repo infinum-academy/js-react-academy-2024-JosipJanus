@@ -12,6 +12,7 @@ describe('ShowCard', () => {
 
     it('should render show card', () => {
         render(<ShowCard {...mockShow} />);
+        expect(screen.getByTestId('show-card')).toBeInTheDocument;
     });
 
     it('should render show card with title', () => {
@@ -20,9 +21,7 @@ describe('ShowCard', () => {
     });
 
     it('should render rating from mock object', () => {
-        const component = render(<ShowCard {...mockShow} />);
-        const ratingElem =
-            component.container.querySelector('#rating')?.innerHTML;
-        expect(ratingElem).toBe('5');
+        render(<ShowCard {...mockShow} />);
+        expect(screen.getByTestId('rating').innerHTML).toContain('5/5');
     });
 });
