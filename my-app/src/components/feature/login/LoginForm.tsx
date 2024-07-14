@@ -14,6 +14,7 @@ import {
     InputGroup,
     Text,
     InputLeftElement,
+    FormErrorMessage,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -28,8 +29,12 @@ interface ILoginFormInputs {
 
 export const LoginForm = () => {
     const router = useRouter();
-    const { register, handleSubmit, reset, formState } =
-        useForm<ILoginFormInputs>();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { isSubmitting, errors },
+    } = useForm<ILoginFormInputs>();
 
     const { mutate } = useSWR(swrKeys.login, fetcher, {
         refreshInterval: 0,
@@ -54,7 +59,7 @@ export const LoginForm = () => {
         <chakra.form onSubmit={handleSubmit(onLogin)}>
             <Card backgroundColor="#371687" borderRadius="16px">
                 <CardBody display="flex" flexDirection="column" gap={6}>
-                    <FormControl isRequired={true}>
+                    <FormControl isRequired={true} isDisabled={isSubmitting}>
                         <InputGroup>
                             <InputLeftElement pointerEvents="none">
                                 <LockIcon color="white" />
@@ -67,8 +72,14 @@ export const LoginForm = () => {
                                 borderRadius="24px"
                             />
                         </InputGroup>
+                        {/* ASK: How to show this */}
+                        {errors.email && (
+                            <FormErrorMessage color="white">
+                                Email is required!
+                            </FormErrorMessage>
+                        )}
                     </FormControl>
-                    <FormControl isRequired={true}>
+                    <FormControl isRequired={true} isDisabled={isSubmitting}>
                         <InputGroup>
                             <InputLeftElement pointerEvents="none">
                                 <LockIcon color="white" />
@@ -90,7 +101,13 @@ export const LoginForm = () => {
                     alignItems="center"
                     gap="8px"
                 >
-                    <Button type="submit">Login</Button>
+                    <Button
+                        isLoading={isSubmitting}
+                        loadingText="Logging in..."
+                        type="submit"
+                    >
+                        Login
+                    </Button>
                     <Text color={'white'}>
                         Don't have an account?{' '}
                         <Text
