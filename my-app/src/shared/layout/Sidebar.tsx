@@ -1,5 +1,6 @@
-import { Box, Flex, Link } from '@chakra-ui/react';
+import { Box, Button, Flex, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const navigationItems = [
     {
@@ -19,8 +20,14 @@ const navigationItems = [
         text: 'My profile',
     },
 ];
-// TODO: Why not full height ???
 export const Sidebar = () => {
+    const router = useRouter();
+
+    const onLogout = () => {
+        localStorage.clear();
+        router.push('/login');
+    };
+
     return (
         <Flex
             flexDirection="column"
@@ -46,7 +53,7 @@ export const Sidebar = () => {
                 </Box>
             </Box>
             <Box backgroundColor="#1B004C" padding={6} width="300px">
-                <NextLink href={'/logout'}>Logout</NextLink>
+                <Button onClick={onLogout}>Logout</Button>
             </Box>
         </Flex>
     );

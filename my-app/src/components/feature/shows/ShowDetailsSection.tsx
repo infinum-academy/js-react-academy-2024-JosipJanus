@@ -12,7 +12,7 @@ export const ShowDetailsSection = (props: IShowDetailsProps) => {
         data: showDetailsResponse,
         error,
         isLoading,
-    } = useSWR(`/${params.id}`, getShow);
+    } = useSWR(`${params.id}`, getShow);
 
     if (error) {
         return <div>Boohoo something went wrong...</div>;
@@ -22,6 +22,7 @@ export const ShowDetailsSection = (props: IShowDetailsProps) => {
         return <div>Loading...</div>;
     }
 
+    console.log('show details', showDetailsResponse);
     const show = showDetailsResponse!;
     return (
         <Box {...props}>

@@ -10,7 +10,7 @@ export const TopRatedSection = (props: ITopRatedSectionProps) => {
         data: showsResponse,
         error,
         isLoading,
-    } = useSWR('/top-rated', getTopRatedShows);
+    } = useSWR('top_rated', getTopRatedShows);
 
     if (error) {
         return <div>Boohoo something went wrong...</div>;

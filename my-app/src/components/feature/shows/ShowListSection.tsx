@@ -10,7 +10,7 @@ export const ShowListSection = (props: IShowListSectionProps) => {
         data: showsResponse,
         error,
         isLoading,
-    } = useSWR('/all-shows', getShows);
+    } = useSWR('/shows', getShows);
 
     if (error) {
         return <div>Boohoo something went wrong...</div>;

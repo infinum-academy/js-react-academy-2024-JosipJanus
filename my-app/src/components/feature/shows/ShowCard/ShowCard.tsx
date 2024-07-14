@@ -1,14 +1,5 @@
 import { StarIcon } from '@chakra-ui/icons';
-import {
-    Box,
-    Card,
-    CardBody,
-    CardFooter,
-    Flex,
-    Heading,
-    Text,
-} from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, Card, CardBody, CardFooter, Image, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 export interface IShowProps {
