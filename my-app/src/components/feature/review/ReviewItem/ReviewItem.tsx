@@ -13,7 +13,7 @@ export const ReviewItem = ({ review, onDelete }: ReviewItemProps) => {
     const [reviewRating, setReviewRating] = useState<number>(review.rating);
 
     return (
-        <Flex w="480px">
+        <Flex w="480px" data-testid="review-item">
             <Card w="100%" backgroundColor="#371686" color="white">
                 <CardHeader>
                     <Text>{review.email}</Text>

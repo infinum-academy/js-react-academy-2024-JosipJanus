@@ -9,6 +9,10 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'fakeimg.pl',
+            },
+            {
+                protocol: 'https',
+                hostname: 'picsum.photos',
             }
         ]
     }

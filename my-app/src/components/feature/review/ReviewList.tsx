@@ -1,5 +1,5 @@
 import { Review } from '@/types/review.type';
-import { ReviewItem } from './ReviewItem';
+import { ReviewItem } from './ReviewItem/ReviewItem';
 
 export type ReviewListProps = {
     reviews: Array<Review>;

@@ -2,24 +2,28 @@
 import { initialShowDetails } from '@/shared/utils/initial-show-details';
 import { Review } from '@/types/review.type';
 import { IShow } from '@/types/show.type';
-import { Fragment, useEffect, useState } from 'react';
+import { Flex } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { ShowReviewSection } from '../review/ShowReviewSection';
-import ShowDetails from './ShowDetails';
-import { init } from 'next/dist/compiled/webpack/webpack';
+import { ShowDetails } from './ShowDetails';
 
 const REVIEWS_KEY = 'reviews';
 
-export const ShowsContainer = () => {
+export interface IShowContainerProps {
+    showDetails: IShow;
+}
+
+export const ShowsContainer = ({ showDetails }: IShowContainerProps) => {
     const [reviewList, setReviewList] = useState([] as Array<Review>);
-    const [show, setShow] = useState<IShow>(initialShowDetails());
+    const [show, setShow] = useState<IShow>(showDetails);
 
     useEffect(() => {
         const loadedReviews = loadFromLocalStorage();
         setReviewList(loadedReviews);
 
         setShow({
-            ...initialShowDetails(),
-            averageRating: calculateAverageRating(loadedReviews),
+            ...showDetails,
+            average_rating: calculateaverage_rating(loadedReviews),
         });
     }, []);
 
@@ -27,7 +31,7 @@ export const ShowsContainer = () => {
         localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviewList));
     };
 
-    const calculateAverageRating = (reviews: Array<Review>): number => {
+    const calculateaverage_rating = (reviews: Array<Review>): number => {
         if (reviews.length === 0) return 0;
         return (
             reviews.reduce((acc, review) => acc + review.rating, 0) /
@@ -49,7 +53,7 @@ export const ShowsContainer = () => {
         setReviewList(reviews);
         setShow({
             ...initialShowDetails(),
-            averageRating: calculateAverageRating(reviews),
+            average_rating: calculateaverage_rating(reviews),
         });
         saveToLocalStorage(reviews);
     };
@@ -60,19 +64,19 @@ export const ShowsContainer = () => {
         setReviewList(newReviews);
         setShow({
             ...initialShowDetails(),
-            averageRating: calculateAverageRating(newReviews),
+            average_rating: calculateaverage_rating(newReviews),
         });
         saveToLocalStorage(newReviews);
     };
 
     return (
-        <Fragment>
+        <Flex flexDirection="column" gap={10}>
             <ShowDetails showDetails={show} />
             <ShowReviewSection
                 onAddShowReview={onAddShowReview}
                 onDeleteReview={onDeleteShowReview}
                 reviews={reviewList}
             />
-        </Fragment>
+        </Flex>
     );
 };
