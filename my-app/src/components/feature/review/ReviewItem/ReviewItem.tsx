@@ -1,7 +1,7 @@
 import { StarRating } from '@/shared/components/StarRating';
 import { Review } from '@/types/review.type';
 import { Card, CardBody, CardFooter, CardHeader } from '@chakra-ui/card';
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
 export type ReviewItemProps = {
@@ -16,7 +16,7 @@ export const ReviewItem = ({ review, onDelete }: ReviewItemProps) => {
         <Flex w="480px" data-testid="review-item">
             <Card w="100%" backgroundColor="#371686" color="white">
                 <CardHeader>
-                    <p>{review.email}</p>
+                    <Text>{review.email}</Text>
                 </CardHeader>
                 <CardBody>
                     <Box>
