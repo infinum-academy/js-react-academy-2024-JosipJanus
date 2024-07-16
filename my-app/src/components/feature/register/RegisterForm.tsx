@@ -1,4 +1,3 @@
-import { fetcher } from '@/fetchers/fetcher';
 import { mutator } from '@/fetchers/mutators';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { LockIcon } from '@chakra-ui/icons';
@@ -9,16 +8,15 @@ import {
     CardFooter,
     chakra,
     FormControl,
+    FormErrorMessage,
     Input,
     InputGroup,
-    Text,
     InputLeftElement,
-    FormErrorMessage,
+    Text,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import useSWR from 'swr';
+import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
 
 interface IRegisterFormInputs {
@@ -31,26 +29,17 @@ export const RegisterForm = () => {
     const {
         register,
         formState: { errors },
-        watch,
         reset,
         handleSubmit,
     } = useForm<IRegisterFormInputs>();
 
-    const { mutate } = useSWR(swrKeys.register, fetcher, {
-        revalidateOnFocus: true,
-        revalidateOnMount: false,
-    });
-
     // ASK: Is this the correct way to prevent useSwr hook from creating requests while the user is idle ?
     const { trigger } = useSWRMutation(swrKeys.register, mutator, {
         onSuccess: (data) => {
-            mutate(data, { revalidate: false });
+            mutate(swrKeys.user, data, { revalidate: false });
             reset();
         },
     });
-
-    console.log('watch email', watch('email'));
-    console.log('watch password', watch('password'));
 
     const onRegister = (data: IRegisterFormInputs) => {
         trigger(data);
@@ -60,9 +49,7 @@ export const RegisterForm = () => {
         <chakra.form onSubmit={handleSubmit(onRegister)}>
             <Card backgroundColor="#371687" borderRadius="16px">
                 <CardBody display="flex" flexDirection="column" gap={6}>
-                    {/* TODO How to show error message here. Probably using state */}
-                    {/* ASK: Can I query form state object here */}
-                    <FormControl isRequired={true}>
+                    <FormControl isInvalid={Boolean(errors.email)}>
                         <InputGroup>
                             <InputLeftElement pointerEvents="none">
                                 <LockIcon color="white" />
@@ -75,13 +62,9 @@ export const RegisterForm = () => {
                                 borderRadius="24px"
                             />
                         </InputGroup>
-                        {errors.password && (
-                            <FormErrorMessage>
-                                "email is required"
-                            </FormErrorMessage>
-                        )}
+                        <FormErrorMessage>"email is required"</FormErrorMessage>
                     </FormControl>
-                    <FormControl isRequired={true}>
+                    <FormControl isInvalid={Boolean(errors.password)}>
                         <InputGroup>
                             <InputLeftElement pointerEvents="none">
                                 <LockIcon color="white" />
@@ -101,7 +84,9 @@ export const RegisterForm = () => {
                         )}
                     </FormControl>
 
-                    <FormControl isRequired={true}>
+                    <FormControl
+                        isInvalid={Boolean(errors.password_confirmation)}
+                    >
                         <InputGroup>
                             <InputLeftElement pointerEvents="none">
                                 <LockIcon color="white" />

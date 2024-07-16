@@ -1,10 +1,10 @@
 'use client';
 import useSWR from 'swr';
 
+import { fetcher } from '@/fetchers/fetcher';
+import { swrKeys } from '@/fetchers/swrKeys';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { swrKeys } from '@/fetchers/swrKeys';
-import { fetcher } from '@/fetchers/fetcher';
 
 interface IAuthRedirectProps {
     to: string;
@@ -13,7 +13,6 @@ interface IAuthRedirectProps {
 
 export const AuthRedirect = ({ to, condition }: IAuthRedirectProps) => {
     const router = useRouter();
-    const userData = localStorage.getItem('USER_DATA');
 
     const { data, isLoading } = useSWR(swrKeys.user, fetcher<any>);
 
@@ -22,12 +21,12 @@ export const AuthRedirect = ({ to, condition }: IAuthRedirectProps) => {
         if (isLoading) {
             return;
         }
-        if (!userData && condition === 'loggedOut') {
+        if (!data && condition === 'loggedOut') {
             console.log('Not logged in, redirecting to login page');
             router.push(to);
         }
 
-        if (userData && condition === 'loggedIn') {
+        if (data && condition === 'loggedIn') {
             console.log('Logged in, redirecting to home page');
             router.push(to);
         }

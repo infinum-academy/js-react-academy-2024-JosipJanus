@@ -1,5 +1,4 @@
 'use client';
-import { fetcher } from '@/fetchers/fetcher';
 import { mutator } from '@/fetchers/mutators';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { LockIcon } from '@chakra-ui/icons';
@@ -10,16 +9,16 @@ import {
     CardFooter,
     chakra,
     FormControl,
+    FormErrorMessage,
     Input,
     InputGroup,
-    Text,
     InputLeftElement,
-    FormErrorMessage,
+    Text,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import useSWR from 'swr';
+import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
 
 interface ILoginFormInputs {
@@ -28,26 +27,15 @@ interface ILoginFormInputs {
 }
 
 export const LoginForm = () => {
-    const router = useRouter();
     const {
         register,
         handleSubmit,
-        reset,
         formState: { isSubmitting, errors },
     } = useForm<ILoginFormInputs>();
 
-    const { mutate } = useSWR(swrKeys.login, fetcher, {
-        refreshInterval: 0,
-        revalidateOnFocus: false,
-        revalidateOnMount: false,
-    });
-
     const { trigger } = useSWRMutation(swrKeys.login, mutator, {
         onSuccess: (data) => {
-            mutate(data, { revalidate: false });
-            localStorage.setItem('USER_DATA', JSON.stringify(data));
-            router.push('/shows');
-            reset();
+            mutate(swrKeys.user, data, { revalidate: false });
         },
     });
 

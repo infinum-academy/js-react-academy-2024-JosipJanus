@@ -3,7 +3,7 @@ export const swrKeys = {
     register: `${apiUrl}users`,
     login: `${apiUrl}users/sign_in`,
     topRated: `${apiUrl}shows/top_rated`,
-    showDetail: `${apiUrl}shows`,
+    showDetail: (id: string) => `${apiUrl}shows/${id}`,
     allShows: `${apiUrl}shows`,
     user: `${apiUrl}users/me`,
 };

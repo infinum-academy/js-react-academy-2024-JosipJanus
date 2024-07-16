@@ -7,8 +7,8 @@ import {
     Flex,
     Heading,
     Text,
+    Image,
 } from '@chakra-ui/react';
-import Image from 'next/image';
 
 export type ShowDetailsProps = {
     showDetails: IShow;

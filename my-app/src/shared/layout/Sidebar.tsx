@@ -1,31 +1,13 @@
+import { swrKeys } from '@/fetchers/swrKeys';
 import { Box, Button, Flex, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useRouter } from 'next/navigation';
+import { mutate } from 'swr';
 
-const navigationItems = [
-    {
-        href: '/all-shows',
-        text: 'All shows',
-    },
-    {
-        href: '/top-rated',
-        text: 'Top rated',
-    },
-    {
-        href: 'my-profile',
-        text: 'My profile',
-    },
-    {
-        href: 'my-profile',
-        text: 'My profile',
-    },
-];
 export const Sidebar = () => {
-    const router = useRouter();
-
     const onLogout = () => {
         localStorage.clear();
-        router.push('/login');
+
+        mutate(swrKeys.user, null);
     };
 
     return (
