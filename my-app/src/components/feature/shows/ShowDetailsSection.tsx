@@ -3,8 +3,8 @@ import { swrKeys } from '@/fetchers/swrKeys';
 import { Box, BoxProps } from '@chakra-ui/react';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
-import { ShowsContainer } from './ShowsContainer';
 import { IShow } from '@/types/show.type';
+import { ShowsDetailsContainer } from './ShowDetailsContainer';
 
 export interface IShowDetailsProps extends BoxProps {}
 
@@ -29,7 +29,7 @@ export const ShowDetailsSection = (props: IShowDetailsProps) => {
     const show = showDetailsResponse!;
     return (
         <Box {...props}>
-            <ShowsContainer showDetails={show.show} />
+            <ShowsDetailsContainer showDetails={show.show} />
         </Box>
     );
 };

@@ -1,6 +1,7 @@
 import { fetcher } from '@/fetchers/fetcher';
 import { IShow } from '@/types/show.type';
 import { swrKeys } from './swrKeys';
+import { Review } from '@/types/review.type';
 
 interface IShowsResponse {
     shows: Array<IShow>;
@@ -16,4 +17,8 @@ export function getTopRatedShows() {
 
 export function getShow(id: string) {
     return fetcher<IShow>(`${swrKeys.showDetail}/${id}`);
+}
+
+export function getShowReviews(show_id: string) {
+    return fetcher<Array<Review>>(`${swrKeys.showReviews(show_id)}`);
 }
