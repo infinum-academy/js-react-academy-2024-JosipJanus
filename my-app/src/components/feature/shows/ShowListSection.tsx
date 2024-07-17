@@ -1,6 +1,6 @@
 import { getShows } from '@/fetchers/show';
 import useSWR from 'swr';
-import { ShowList } from './ShowList';
+import { ShowList } from './ShowList/ShowList';
 import { Box, BoxProps } from '@chakra-ui/react';
 
 interface IShowListSectionProps extends BoxProps {}
