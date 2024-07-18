@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { ReviewItem } from './ReviewItem';
+import { deleteReviewItem } from '../../../../fetchers/mutators';
+import { act } from 'react';
+import { swrKeys } from '@/fetchers/swrKeys';
 //ASK: How to skip tests in jest?
-jest.mock('../../../../fetchers/mutators', () => ({
-    deleteReview: jest.fn().mockResolvedValue(null),
+jest.mock('@/fetchers/mutators', () => ({
+    deleteReviewItem: jest.fn().mockResolvedValue(null),
 }));
 
 jest.mock('swr', () => ({
@@ -36,7 +39,11 @@ fdescribe('ReviewItem', () => {
         const onDelete = jest.fn();
         render(<ReviewItem review={mockReview} />);
         const deleteButton = screen.getByText('Delete');
-        deleteButton.click();
-        expect(onDelete).toHaveBeenCalledWith(mockReview.id);
+        act(() => {
+            deleteButton.click();
+        });
+        expect(deleteReviewItem).toHaveBeenCalledWith(
+            swrKeys.deleteReview(mockReview.id)
+        );
     });
 });

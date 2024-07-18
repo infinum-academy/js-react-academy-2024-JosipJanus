@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import { ShowList } from './ShowList';
 import { IShow } from '@/types/show.type';
 import { ShowCard } from '../ShowCard/ShowCard';
+import exp from 'constants';
 
 jest.mock('../ShowCard/ShowCard', () => {
     return { ShowCard: jest.fn().mockReturnValue(null) };
@@ -29,7 +30,15 @@ describe('ShowList', () => {
         render(<ShowList shows={mockShows} />);
 
         expect(ShowCard).toHaveBeenCalledTimes(2);
-        expect(ShowCard).toHaveBeenNthCalledWith(1, { ...mockShows[0] }, {});
-        expect(ShowCard).toHaveBeenNthCalledWith(2, { ...mockShows[1] }, {});
+        expect(ShowCard).toHaveBeenNthCalledWith(
+            1,
+            { ...mockShows[0] },
+            expect.anything()
+        );
+        expect(ShowCard).toHaveBeenNthCalledWith(
+            2,
+            { ...mockShows[1] },
+            expect.anything()
+        );
     });
 });
