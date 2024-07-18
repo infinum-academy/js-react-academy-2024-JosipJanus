@@ -1,26 +1,15 @@
-import { Box, Flex, Link } from '@chakra-ui/react';
+import { swrKeys } from '@/fetchers/swrKeys';
+import { Box, Button, Flex, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { mutate } from 'swr';
 
-const navigationItems = [
-    {
-        href: '/all-shows',
-        text: 'All shows',
-    },
-    {
-        href: '/top-rated',
-        text: 'Top rated',
-    },
-    {
-        href: 'my-profile',
-        text: 'My profile',
-    },
-    {
-        href: 'my-profile',
-        text: 'My profile',
-    },
-];
-// TODO: Why not full height ???
 export const Sidebar = () => {
+    const onLogout = () => {
+        localStorage.clear();
+
+        mutate(swrKeys.user, null);
+    };
+
     return (
         <Flex
             flexDirection="column"
@@ -46,7 +35,7 @@ export const Sidebar = () => {
                 </Box>
             </Box>
             <Box backgroundColor="#1B004C" padding={6} width="300px">
-                <NextLink href={'/logout'}>Logout</NextLink>
+                <Button onClick={onLogout}>Logout</Button>
             </Box>
         </Flex>
     );

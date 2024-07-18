@@ -1,8 +1,10 @@
-import { getShow } from '@/fetchers/show';
+import { fetcher } from '@/fetchers/fetcher';
+import { swrKeys } from '@/fetchers/swrKeys';
+import { Box, BoxProps } from '@chakra-ui/react';
+import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 import { ShowsContainer } from './ShowsContainer';
-import { useParams } from 'next/navigation';
-import { Box, BoxProps } from '@chakra-ui/react';
+import { IShow } from '@/types/show.type';
 
 export interface IShowDetailsProps extends BoxProps {}
 
@@ -12,7 +14,10 @@ export const ShowDetailsSection = (props: IShowDetailsProps) => {
         data: showDetailsResponse,
         error,
         isLoading,
-    } = useSWR(`/${params.id}`, getShow);
+    } = useSWR<{ show: IShow }>(
+        swrKeys.showDetail(params.id as string),
+        fetcher
+    );
 
     if (error) {
         return <div>Boohoo something went wrong...</div>;
@@ -21,11 +26,10 @@ export const ShowDetailsSection = (props: IShowDetailsProps) => {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-
     const show = showDetailsResponse!;
     return (
         <Box {...props}>
-            <ShowsContainer showDetails={show} />
+            <ShowsContainer showDetails={show.show} />
         </Box>
     );
 };

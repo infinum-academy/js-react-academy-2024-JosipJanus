@@ -3,7 +3,15 @@ export async function fetcher<T>(
     init?: RequestInit
 ): Promise<T> {
     try {
-        const response = await fetch(input, init);
+        const response = await fetch(input, {
+            ...init,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Token': localStorage.getItem('access_token') ?? '',
+                Uid: localStorage.getItem('uid') ?? '',
+                Client: localStorage.getItem('client') ?? '',
+            },
+        });
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }

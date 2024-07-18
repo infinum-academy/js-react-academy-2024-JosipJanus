@@ -3,6 +3,7 @@ import { Flex } from '@chakra-ui/react';
 import { useState } from 'react';
 
 export type StarRatingProps = {
+    submitting: boolean;
     rating: number;
     onChange?: (rating: number) => void;
 };
