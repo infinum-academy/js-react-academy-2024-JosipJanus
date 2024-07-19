@@ -1,5 +1,5 @@
 import { swrKeys } from '@/fetchers/swrKeys';
-import { Box, Button, Flex, Link } from '@chakra-ui/react';
+import { Box, Button, Flex, Link, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { mutate } from 'swr';
 
@@ -14,27 +14,27 @@ export const Sidebar = () => {
         <Flex
             flexDirection="column"
             height="100%"
-            backgroundColor="#1B004C"
+            bg="darkPrimary"
             padding={2}
             color="white"
             max-width="300px"
             justify={'space-between'}
         >
             <Box>
-                <Box fontWeight="bold" padding={2}>
-                    TV shows app
+                <Box padding={2}>
+                    <Text textStyle="xl">TV shows app</Text>
                 </Box>
-                <Box backgroundColor="#1B004C" padding={6} width="300px">
+                <Box padding={6} width="300px">
                     <NextLink href={'/shows'}>All shows</NextLink>
                 </Box>
-                <Box backgroundColor="#1B004C" padding={6} width="300px">
+                <Box padding={6} width="300px">
                     <NextLink href={'/top-rated'}>Top rated</NextLink>
                 </Box>
-                <Box backgroundColor="#1B004C" padding={6} width="300px">
+                <Box padding={6} width="300px">
                     <NextLink href={'/my-profile'}>My profile</NextLink>
                 </Box>
             </Box>
-            <Box backgroundColor="#1B004C" padding={6} width="300px">
+            <Box padding={6} width="300px">
                 <Button onClick={onLogout}>Logout</Button>
             </Box>
         </Flex>
