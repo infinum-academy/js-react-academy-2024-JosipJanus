@@ -8,7 +8,7 @@ export default function AllShowsPage() {
     return (
         <Fragment>
             <AuthRedirect to="/login" condition="loggedOut" />
-            <ShowListSection padding={6} />;
+            <ShowListSection padding={6} />
         </Fragment>
     );
 }

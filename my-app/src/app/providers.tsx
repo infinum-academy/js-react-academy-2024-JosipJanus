@@ -9,7 +9,7 @@ import theme from '@/styles/theme';
 export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <SWRConfig>
-            <ChakraProvider theme={theme}>{children}</ChakraProvider>;
+            <ChakraProvider theme={theme}>{children}</ChakraProvider>
         </SWRConfig>
     );
 }
