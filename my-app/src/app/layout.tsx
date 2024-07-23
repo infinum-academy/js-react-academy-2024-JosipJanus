@@ -8,15 +8,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" style={{ height: '100%' }}>
-            <body
-                style={{
-                    backgroundColor: 'primary',
-                    padding: '0',
-                    margin: '0',
-                    display: 'flex',
-                    height: '100%',
-                }}
-            >
+            <body>
                 <Providers>{children}</Providers>
             </body>
         </html>

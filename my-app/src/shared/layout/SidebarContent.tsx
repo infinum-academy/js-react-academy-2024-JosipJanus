@@ -4,6 +4,8 @@ export const SidebarContent = ({ children }: { children: React.ReactNode }) => {
     return (
         <Flex
             h="100%"
+            width="100%"
+            grow={1}
             overflow="scroll"
             backgroundColor="darkPrimary"
             justifyContent="center"
