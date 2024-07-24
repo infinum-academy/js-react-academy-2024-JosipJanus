@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import { PickerContext } from './PickerContextProvider';
 
 export const PickerProgress = () => {
-    const { currentStep, shows } = useContext(PickerContext);
+    const { currentStep, allShows } = useContext(PickerContext);
 
-    if (!shows) {
+    if (!allShows) {
         return null;
     }
 

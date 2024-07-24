@@ -1,12 +1,13 @@
 import { getShows } from '@/fetchers/show';
 import { IShow } from '@/types/show.type';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 interface IPickerContext {
     currentStep: number;
     setCurrentStep: (step: number) => void;
-    shows?: Array<IShow>;
+    allShows: Array<IShow>;
+    setAllShows: (shows: Array<IShow>) => void;
     selectedShows: Array<IShow>;
     setSelectedShows: (shows: Array<IShow>) => void;
 }
@@ -24,7 +25,14 @@ export const PickerContextProvider = ({
 }: IPickerContextProviderChildren) => {
     const [currentStep, setCurrentStep] = useState<number>(0);
     const [selectedShows, setSelectedShows] = useState<Array<IShow>>([]);
+    const [allShows, setAllShows] = useState<Array<IShow>>([]);
     const { data: showsResponse } = useSWR('/shows', getShows);
+
+    useEffect(() => {
+        if (allShows.length === 0) {
+            setAllShows(showsResponse?.shows || []);
+        }
+    }, [showsResponse]);
 
     const shows = showsResponse?.shows;
 
@@ -33,7 +41,8 @@ export const PickerContextProvider = ({
             value={{
                 currentStep,
                 setCurrentStep,
-                shows,
+                allShows,
+                setAllShows,
                 selectedShows,
                 setSelectedShows,
             }}

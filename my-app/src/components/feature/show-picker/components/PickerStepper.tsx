@@ -4,9 +4,9 @@ import { PickerStep } from './PickerStep';
 import { PickedShows } from './PickedShows';
 
 export const PickerStepper = () => {
-    const { currentStep, shows } = useContext(PickerContext);
+    const { currentStep, allShows } = useContext(PickerContext);
 
-    if (!shows) {
+    if (!allShows) {
         return null;
     }
 

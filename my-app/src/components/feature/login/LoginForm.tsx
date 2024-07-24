@@ -16,7 +16,6 @@ import {
     Text,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
