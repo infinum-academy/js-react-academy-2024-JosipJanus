@@ -10,9 +10,7 @@ import { PickerContextProvider } from '@/components/feature/show-picker/componen
 export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <SWRConfig>
-            <ChakraProvider theme={theme}>
-                <PickerContextProvider>{children}</PickerContextProvider>
-            </ChakraProvider>
+            <ChakraProvider theme={theme}>{children}</ChakraProvider>
         </SWRConfig>
     );
 }
