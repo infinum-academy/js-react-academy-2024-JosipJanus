@@ -57,6 +57,7 @@ export const PickerButtons = () => {
                     as={NextLink}
                     href={'/shows'}
                     onClick={() => {
+                        unexcludeSelectedShows();
                         setSelectedShows([]);
                         setCurrentStep(0);
                     }}

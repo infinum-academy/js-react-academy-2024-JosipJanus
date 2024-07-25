@@ -19,6 +19,7 @@ import NextLink from 'next/link';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
+import { PasswordInput } from './components/PasswordInput';
 
 interface ILoginFormInputs {
     email: string;
@@ -59,7 +60,6 @@ export const LoginForm = () => {
                                 borderRadius="24px"
                             />
                         </InputGroup>
-                        {/* ASK: How to show this */}
                         {errors.email && (
                             <FormErrorMessage color="white">
                                 Email is required!
@@ -67,18 +67,10 @@ export const LoginForm = () => {
                         )}
                     </FormControl>
                     <FormControl isRequired={true} isDisabled={isSubmitting}>
-                        <InputGroup>
-                            <InputLeftElement pointerEvents="none">
-                                <LockIcon color="white" />
-                            </InputLeftElement>
-                            <Input
-                                {...register('password')}
-                                type="password"
-                                color="white"
-                                placeholder="Password"
-                                borderRadius="24px"
-                            />
-                        </InputGroup>
+                        <PasswordInput
+                            placeholder="Kastom lozinka placeholder"
+                            {...register('password')}
+                        ></PasswordInput>
                     </FormControl>
                 </CardBody>
                 <CardFooter
