@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows app</title>
+    <link rel="stylesheet" href="./reset.css">
+    </style>
+    <link rel="stylesheet" href="./styles.css">
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>TV Shows app</h1>
+    </header>
+    <main>
+        <section>
+            <div class="movie-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BYTY1MzA0Y2ItOWUwMy00ZDA1LWI1NGQtMDlhYjBkYzRiNTVmXkEyXkFqcGdeQXVyMjI2NDIxNjI@._V1_FMjpg_UY644_.jpg"
+                    alt="">
+                <div class="movie-description">
+                    <h2 class="movie-title">One Song a Day Takes Mischief Away</h2>
+                    <div class="summary">The story is seen through the eyes of 6 year old Perica Safranek. On
+                        a family picnic Perica's
+                        mother
+                        starts flirting with Mr Fulir, a Zagreb Dandy. The father at first doesn't notice it, but wants
+                        to
+                        marry off the aunt. After a couple of invitations to their Zagreb home, the father becomes aware
+                        of
+                        Fulir's passes at his wife...
+                    </div>
+                    <div id="average-rating"></div>
+                </div>
+            </div>
+        </section>
+        <form>
+            <section class="reviews">
+                <div class="review">
+                    <h2>Reviews</h2>
+                    <textarea name="review" id="review" rows="4" placeholder="Add review..."></textarea>
+                </div>
+                <div class="rating-stars">
+                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">&#9733;</label>
+                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">&#9733;</label>
+                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">&#9733;</label>
+                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">&#9733;</label>
+                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">&#9733;</label>
+                </div>
+                <button type="submit" class="submit-btn">Submit review</button>
+            </section>
+        </form>
+        <section class="comments">
+            <h2>Reviews</h2>
+            <div id="feed">
+            </div>
+
+        </section>
+    </main>
+    <script src="./index.js"></script>
+</body>
+
+</html>
