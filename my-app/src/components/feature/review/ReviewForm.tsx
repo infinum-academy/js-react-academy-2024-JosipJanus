@@ -1,5 +1,6 @@
+import { createReviewItem } from '@/fetchers/mutators';
+import { swrKeys } from '@/fetchers/swrKeys';
 import { StarRating } from '@/shared/components/StarRating';
-import { generateRandomEmailAddress } from '@/shared/utils/random-email.generator';
 import { Review } from '@/types/review.type';
 import {
     Box,
@@ -10,37 +11,40 @@ import {
     FormControl,
     Input,
 } from '@chakra-ui/react';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
+import useSWRMutation from 'swr/mutation';
 
 export type ReviewFormProps = {
-    addShowReview: (review: Review) => void;
+    show_id: string;
 };
 
-export const ReviewForm = ({ addShowReview }: ReviewFormProps) => {
+export const ReviewForm = ({ show_id }: ReviewFormProps) => {
     const [rating, setRating] = useState<number>(0);
     const {
         formState: { isSubmitting },
+        register,
         handleSubmit,
-    } = useForm();
+        reset,
+    } = useForm<Review>();
+    const { trigger, isMutating } = useSWRMutation(
+        swrKeys.postReview,
+        createReviewItem,
+        {
+            onSuccess: () => {
+                reset();
+                setRating(0);
+                mutate(swrKeys.showReviews(show_id));
+            },
+        }
+    );
 
-    const onSubmitHandler = () => {
-        const reviewInputElement = document.getElementById(
-            'review-input'
-        ) as HTMLFormElement;
-
-        const value = reviewInputElement.value;
-
-        const newReview: Review = {
-            id: crypto.randomUUID().toString(),
-            email: generateRandomEmailAddress(),
-            review: value,
-            rating,
-        };
-
-        addShowReview(newReview);
-        setRating(0);
-        reviewInputElement.value = '';
+    const onReviewSubmit = async (data: Review) => {
+        data.show_id = parseInt(show_id);
+        data.rating = rating;
+        console.log(data);
+        await trigger(data);
     };
 
     return (
@@ -50,7 +54,7 @@ export const ReviewForm = ({ addShowReview }: ReviewFormProps) => {
             gap={4}
             min-width="480px"
             as="form"
-            onSubmit={handleSubmit(onSubmitHandler)}
+            onSubmit={handleSubmit(onReviewSubmit)}
         >
             <Card backgroundColor="#371686">
                 <CardBody width="480px">
@@ -60,18 +64,15 @@ export const ReviewForm = ({ addShowReview }: ReviewFormProps) => {
                                 id="review-input"
                                 variant="filled"
                                 placeholder="Add your review"
+                                {...register('comment')}
                                 _focus={{ color: 'white' }}
                                 _active={{ color: 'white' }}
                             />
 
-                            <StarRating
-                                submitting={isSubmitting}
-                                rating={rating}
-                                onChange={setRating}
-                            />
+                            <StarRating rating={rating} onChange={setRating} />
 
                             <Button
-                                isLoading={isSubmitting}
+                                isLoading={isMutating}
                                 loadingText="Submitting review..."
                                 type="submit"
                                 width="fit-content"

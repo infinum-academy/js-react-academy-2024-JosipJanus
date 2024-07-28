@@ -6,4 +6,8 @@ export const swrKeys = {
     showDetail: (id: string) => `${apiUrl}shows/${id}`,
     allShows: `${apiUrl}shows`,
     user: `${apiUrl}users/me`,
+    postReview: `${apiUrl}reviews`,
+    showReviews: (id: string) => `${apiUrl}shows/${id}/reviews`,
+    deleteReview: (id: string) => `${apiUrl}reviews/${id}`,
+    updateReview: (id: string) => `${apiUrl}reviews/${id}`,
 };

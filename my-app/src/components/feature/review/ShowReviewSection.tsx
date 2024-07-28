@@ -6,17 +6,17 @@ import { ReviewList } from './ReviewList';
 export type ShowReviewSectionProps = {
     reviews: Array<Review>;
     onDeleteReview: (id: string) => void;
-    onAddShowReview: (review: Review) => void;
+    showId: string;
 };
 
 export const ShowReviewSection = ({
     reviews,
+    showId,
     onDeleteReview,
-    onAddShowReview,
 }: ShowReviewSectionProps) => {
     return (
         <Fragment>
-            <ReviewForm addShowReview={onAddShowReview} />
+            <ReviewForm show_id={showId} />
             <ReviewList onDeleteReview={onDeleteReview} reviews={reviews} />
         </Fragment>
     );

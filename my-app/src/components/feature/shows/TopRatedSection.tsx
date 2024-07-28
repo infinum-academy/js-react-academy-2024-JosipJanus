@@ -1,7 +1,7 @@
 import { getTopRatedShows } from '@/fetchers/show';
 import { Box, BoxProps } from '@chakra-ui/react';
 import useSWR from 'swr';
-import { ShowList } from './ShowList';
+import { ShowList } from './ShowList/ShowList';
 
 interface ITopRatedSectionProps extends BoxProps {}
 
