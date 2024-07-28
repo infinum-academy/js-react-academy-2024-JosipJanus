@@ -1,27 +1,13 @@
-import { extendTheme } from '@chakra-ui/react';
 import '@fontsource/roboto';
-
-const colors = {
-    primary: '#371687',
-    secondary: '#8D5CE5',
-    darkPrimary: '#1B004C',
-    error: '#FF2498',
-};
+import { extendTheme } from '@chakra-ui/react';
+import { textstyles } from './foundations/textstyles';
+import { fonts } from './foundations/fonts';
+import { colors } from './foundations/colors';
 
 const theme = extendTheme({
-    components: {},
-    textStyles: {
-        xl: {
-            fontSize: '32px',
-            fontWeight: '500',
-            lineHeight: '48px',
-        },
-    },
-    colors,
-    fonts: {
-        body: 'Roboto, sans-serif',
-        heading: 'Roboto, sans-serif',
-    },
+    textStyles: textstyles,
+    colors: colors,
+    fonts: fonts,
 });
 
 export default theme;

@@ -1,5 +1,5 @@
 import { swrKeys } from '@/fetchers/swrKeys';
-import { Box, Button, Flex, Link, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { mutate } from 'swr';
 
@@ -38,19 +38,5 @@ export const Sidebar = () => {
                 <Button onClick={onLogout}>Logout</Button>
             </Box>
         </Flex>
-    );
-};
-
-export const SideBarItem = (href: string, text: string) => {
-    return (
-        <Box
-            flexDirection="column"
-            h="100%"
-            backgroundColor="#1B004C"
-            padding={6}
-            width="300px"
-        >
-            <Link href={href}>text</Link>
-        </Box>
     );
 };

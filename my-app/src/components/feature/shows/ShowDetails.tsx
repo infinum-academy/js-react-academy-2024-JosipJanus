@@ -18,7 +18,7 @@ export const ShowDetails = ({
     showDetails: { title, description, image_url, average_rating },
 }: ShowDetailsProps) => {
     return (
-        <Card overflow={'hidden'} width={480}>
+        <Card width={480}>
             <Flex direction={'column'}>
                 <CardBody padding={0}>
                     {
