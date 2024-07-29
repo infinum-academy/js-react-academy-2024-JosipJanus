@@ -1,9 +1,9 @@
 'use client';
 
-import { Sidebar } from '@/shared/layout/Sidebar';
 import { SidebarContent } from '@/shared/layout/SidebarContent';
-import { Fragment, Suspense } from 'react';
-import Loading from './loading';
+import { SidebarNavigation } from '@/shared/layout/SidebarNavigation';
+import { Flex } from '@chakra-ui/react';
+import React, { Fragment } from 'react';
 
 export default function ShowsLayout({
     children,
@@ -11,11 +11,9 @@ export default function ShowsLayout({
     children: React.ReactNode;
 }) {
     return (
-        <Fragment>
-            <Sidebar />
-            <SidebarContent>
-                <Suspense fallback={<Loading />}>{children}</Suspense>
-            </SidebarContent>
-        </Fragment>
+        <Flex direction={{ base: 'column', md: 'row' }}>
+            <SidebarNavigation />
+            <SidebarContent>{children}</SidebarContent>
+        </Flex>
     );
 }

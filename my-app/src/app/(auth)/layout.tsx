@@ -10,7 +10,7 @@ export default function AuthLayout({
     return (
         <Fragment>
             <AuthRedirect to="/shows" condition="loggedIn" />
-            <Container>{children}</Container>
+            <Container bg="darkPrimary">{children}</Container>
         </Fragment>
     );
 }
