@@ -36,6 +36,10 @@ export const PickerContextProvider = ({
 
     const shows = showsResponse?.shows;
 
+    if (!shows?.length) {
+        return null;
+    }
+
     return (
         <PickerContext.Provider
             value={{
