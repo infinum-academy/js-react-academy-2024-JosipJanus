@@ -37,8 +37,8 @@ export const ShowDetails = ({
                         />
                     }
                 </CardBody>
-                <CardFooter display={'flex'} flexDirection={'column'}>
-                    <Heading as={'h2'}>{title}</Heading>
+                <CardFooter display="flex" flexDirection="column">
+                    <Heading as="h2">{title}</Heading>
                     <Box>{description}</Box>
                     {average_rating !== 0 ? (
                         <Text fontWeight="bold">Rating: {average_rating}</Text>
