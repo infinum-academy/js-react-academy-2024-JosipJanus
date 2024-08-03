@@ -33,6 +33,9 @@ export const Sidebar = () => {
                 <Box padding={6} width="300px">
                     <NextLink href={'/my-profile'}>My profile</NextLink>
                 </Box>
+                <Box padding={6} width="300px">
+                    <NextLink href={'/shows/picker'}>Shows picker</NextLink>
+                </Box>
             </Box>
             <Box padding={6} width="300px">
                 <Button onClick={onLogout}>Logout</Button>

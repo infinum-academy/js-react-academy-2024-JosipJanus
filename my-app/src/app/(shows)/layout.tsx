@@ -11,7 +11,7 @@ export default function ShowsLayout({
     children: React.ReactNode;
 }) {
     return (
-        <Flex direction={{ base: 'column', md: 'row' }}>
+        <Flex direction={{ base: 'column', md: 'row' }} h="100%">
             <SidebarNavigation />
             <SidebarContent>{children}</SidebarContent>
         </Flex>
